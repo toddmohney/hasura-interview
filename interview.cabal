@@ -1,0 +1,120 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.33.0.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: 457c4db23e7ff964217e9671f78406f8da7a64437deb555791f8c74dc8c8f175
+
+name:           interview
+version:        0.1.0.0
+synopsis:       I'm a interview project
+description:    I'm a interview project
+category:       Web
+homepage:       https://github.com/toddmohney/hasura-interview#readme
+bug-reports:    https://github.com/toddmohney/hasura-interview/issues
+author:         Todd Mohney
+maintainer:     toddmohney@gmail.com
+copyright:      2020 Todd Mohney
+license:        MIT
+build-type:     Simple
+
+source-repository head
+  type: git
+  location: https://github.com/toddmohney/hasura-interview
+
+library
+  exposed-modules:
+      Interview
+      Interview.Class.FastLogger
+      Interview.Class.Time
+      Interview.Database
+      Interview.Database.Class
+      Interview.Errors
+      Interview.Environment
+  other-modules:
+      Interview.Database.Config
+      Interview.Database.Logging
+      Interview.Database.Migrations
+      Interview.Database.Models
+      Paths_interview
+  hs-source-dirs:
+      ./lib
+  default-extensions: DefaultSignatures DeriveGeneric DerivingStrategies FlexibleContexts GeneralizedNewtypeDeriving InstanceSigs LambdaCase MultiParamTypeClasses OverloadedStrings RecordWildCards TemplateHaskell TypeApplications TypeFamilies
+  ghc-options: -Wall -Wcompat -Werror -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wredundant-constraints -fhide-source-paths -fno-warn-warnings-deprecations -freverse-errors -fwarn-unused-binds -fwarn-unused-imports -fwarn-unused-matches
+  build-depends:
+      base
+    , bytestring
+    , exceptions
+    , fast-logger
+    , filepath
+    , http-api-data
+    , http-client
+    , http-media
+    , http-types
+    , lens
+    , lens-aeson
+    , monad-logger
+    , mtl
+    , persistent
+    , persistent-postgresql
+    , persistent-template
+    , servant
+    , servant-blaze
+    , servant-server
+    , text
+    , time
+    , unordered-containers
+    , uuid
+  default-language: Haskell2010
+
+executable server
+  main-is: Main.hs
+  other-modules:
+      API
+      App
+      AppConfig
+      Components.MainContainer
+      Pages.Home
+      RouteHandlers.Home
+      Server
+      Paths_interview
+  hs-source-dirs:
+      ./src
+  default-extensions: DefaultSignatures DeriveGeneric DerivingStrategies FlexibleContexts GeneralizedNewtypeDeriving InstanceSigs LambdaCase MultiParamTypeClasses OverloadedStrings RecordWildCards TemplateHaskell TypeApplications TypeFamilies
+  ghc-options: -Wall -Wcompat -Werror -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wredundant-constraints -fhide-source-paths -fno-warn-warnings-deprecations -freverse-errors -fwarn-unused-binds -fwarn-unused-imports -fwarn-unused-matches -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base
+    , blaze-html
+    , blaze-markup
+    , exceptions
+    , fast-logger
+    , interview
+    , lens
+    , mtl
+    , servant-blaze
+    , servant-server
+    , text
+    , wai
+    , wai-cors
+    , wai-extra
+    , warp
+  default-language: Haskell2010
+
+test-suite hspecs
+  type: exitcode-stdio-1.0
+  main-is: Main.hs
+  other-modules:
+      Spec
+      Paths_interview
+  hs-source-dirs:
+      ./test
+  default-extensions: DefaultSignatures DeriveGeneric DerivingStrategies FlexibleContexts GeneralizedNewtypeDeriving InstanceSigs LambdaCase MultiParamTypeClasses OverloadedStrings RecordWildCards TemplateHaskell TypeApplications TypeFamilies
+  ghc-options: -Wall -Wcompat -Werror -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wredundant-constraints -fhide-source-paths -fno-warn-warnings-deprecations -freverse-errors -fwarn-unused-binds -fwarn-unused-imports -fwarn-unused-matches -fno-warn-unused-imports -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base
+    , hspec
+    , interview
+    , text
+    , unordered-containers
+  default-language: Haskell2010
