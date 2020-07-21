@@ -1,0 +1,33 @@
+version: "3.3"
+
+volumes:
+  postgres:
+
+services:
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: server
+    env_file:
+      - ./env/server.env
+    depends_on:
+      - postgres
+    ports:
+      - 3000:3000
+    volumes:
+      # We mount the migrations folder so we can edit, run, and rerun
+      # the migrations without rebuilding the container after every change.
+      - ./apps/webapp/migrations:/etc/workspace/migrations
+      - ./apps/webapp/assets:/usr/local/src/workspace/assets
+
+  postgres:
+    image: postgres:12-alpine
+    restart: always
+    volumes:
+      - postgres:/var/lib/postgresql/data/pgdata
+    env_file:
+      - ./env/postgres.env
+    ports:
+      - 5433:5432
+

@@ -54,9 +54,9 @@ mainNavHtml =
             ! href "/"
             $ do
                 img
-                    ! src "/public/images/donkeyboat.png"
+                    ! src "/public/images/donkeyboat.jpg"
                     ! class_ "mr-2"
                     ! height (toValue (24 :: Int))
                     ! width (toValue (24 :: Int))
 
-                span "Supermachine"
+                span "Hasura Interview"

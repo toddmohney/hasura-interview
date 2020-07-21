@@ -12,3 +12,19 @@ devel: ## Builds and tests upon file change
 		--fast \
 		--file-watch \
 		--no-keep-going
+
+
+.PHONY: restart
+restart: ## Rebuilds and restarts our server
+	@$(MAKE) build-server
+	@docker-compose rm -sf server
+	@docker-compose up -d
+
+
+.PHONY: build-server
+build-server: ## Builds a new Docker image for our server
+	@stack build
+	@cp \
+		$$(stack path | awk '/local-install/ {print $$2}')/bin/* \
+		./bin
+	@docker-compose build server

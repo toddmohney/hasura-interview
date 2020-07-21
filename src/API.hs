@@ -35,4 +35,4 @@ routeHandlers =
   where
     publicRouteHandlers =
         home
-            :<|> serveDirectoryWebApp "/usr/local/src/interview/assets/dist"
+            :<|> serveDirectoryWebApp "/usr/local/src/workspace/public"

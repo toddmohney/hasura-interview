@@ -10,7 +10,6 @@ module Interview.Database.Models
     , ConnectionPool
     , ConnectionString
     , Entity(..)
-    , EntityField(..)
     , Filter(..)
     , Key
     , SelectOpt(..)
@@ -43,12 +42,10 @@ module Interview.Database.Models
     , (!=.)
     ) where
 
-import Data.Text (Text)
 import Database.Persist.Postgresql
     ( ConnectionPool
     , ConnectionString
     , Entity(..)
-    , EntityField
     , SqlPersistT
     , rawExecute
     , runSqlPool
@@ -88,14 +85,8 @@ import Database.Persist.Sql
     )
 import Database.Persist.TH
 
-import Interview.Class.Time (UTCTime)
-
 
 share [mkPersist sqlSettings { mpsGenerateLenses = True }, mkMigrate "migrateAll"] [persistLowerCase|
-    Profile sql=profiles
-        name Text
-        createdAt UTCTime
-        deriving Show Eq
 |]
 
 
