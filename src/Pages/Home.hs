@@ -32,21 +32,14 @@ homePageHtml _page =
 
 
             div ! class_ "row" $ do
-                div ! class_ "col-lg-3" $ do
+                div ! class_ "col-lg-6" $ do
                     h2 "API endpoint metrics"
                     hr
                     pre
                         ! id "api-metrics"
                         $ toHtml ("" :: Text)
 
-                div ! class_ "col-lg-3" $ do
-                    h2 "API RAW endpoint metrics"
-                    hr
-                    pre
-                        ! id "api-raw-metrics"
-                        $ toHtml ("" :: Text)
-
-                div ! class_ "col-lg-3" $ do
+                div ! class_ "col-lg-6" $ do
                     h2 "GC metrics"
                     hr
                     pre

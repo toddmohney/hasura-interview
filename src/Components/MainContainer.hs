@@ -46,7 +46,7 @@ wrapperHtml pageContent =
             div ! class_ "container-fluid p-0" $ do
                 mainNavHtml
 
-                div ! class_ "m-5" $
+                div ! class_ "container my-5" $
                     pageContent
 
 
