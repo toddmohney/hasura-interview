@@ -191,4 +191,4 @@ getDistributionStats key sample =
 
 
 errVal :: Int64
-errVal = (-1)
+errVal = -1

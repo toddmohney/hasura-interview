@@ -1,7 +1,7 @@
 module Interview.Database.Migrations where
 
 
-import Control.Monad (when)
+import Control.Monad (unless)
 import Control.Exception (throwIO)
 import qualified Data.List as L
 import Data.Text (Text)
@@ -26,7 +26,7 @@ runMigrations' = runSqlPool (runMigrationSilent migrateAll)
 ensureNoPendingMigrations :: ConnectionPool -> IO ()
 ensureNoPendingMigrations connPool = do
     results <- runSqlPool (showMigration migrateAll) connPool
-    when (not $ L.null results) $ do
+    unless (L.null results) $ do
         putStrLn . T.unpack $ mkMessage results
         throwIO $ PendingMigrationsError ""
   where

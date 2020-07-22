@@ -5,10 +5,10 @@
 module API where
 
 import           Servant
-import           Orphans (WebSocket)
 import           Servant.HTML.Blaze (HTML)
 
 import           App (AppT)
+import           Orphans (WebSocket)
 import           Pages.Home (HomePage)
 import           RouteHandlers.Home (home)
 import           RouteHandlers.Health (serverHealth)

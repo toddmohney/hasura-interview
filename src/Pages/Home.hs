@@ -1,6 +1,5 @@
 module Pages.Home where
 
-import           Control.Lens hiding (pre)
 import           Data.Text (Text)
 import           Prelude hiding (head, id, div, span)
 import           Text.Blaze.Html5 hiding (title)
@@ -10,10 +9,6 @@ import           Components.MainContainer (wrapperHtml)
 
 
 data HomePage = HomePage
-    { _message :: Text
-    } deriving (Show)
-
-makeLenses ''HomePage
 
 
 instance ToMarkup HomePage where
@@ -23,11 +18,18 @@ instance ToMarkup HomePage where
 homePageHtml
     :: HomePage
     -> Markup
-homePageHtml page =
+homePageHtml _page =
     wrapperHtml $
         div $ do
-            h1 "Server Health Metrics"
-            p . toHtml $ page ^. message
+            div ! class_ "jumbotron" $ do
+                h1
+                    ! class_ "display-4"
+                    $ toHtml ("Server Health" :: Text)
+
+                p
+                    ! class_ "lead"
+                    $ toHtml ("Useful metrics for observing the performance of your server." :: Text)
+
 
             div ! class_ "row" $ do
                 div ! class_ "col-lg-3" $ do

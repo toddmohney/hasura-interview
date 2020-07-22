@@ -11,7 +11,15 @@ devel: ## Builds and tests upon file change
 	@stack test \
 		--fast \
 		--file-watch \
-		--no-keep-going
+		--no-keep-going \
+		--exec="$(MAKE) lint"
+
+
+.PHONY: lint
+lint: ## Runs code quality and style consistency checks
+	@hlint lint \
+		./src \
+		./lib
 
 
 .PHONY: restart
