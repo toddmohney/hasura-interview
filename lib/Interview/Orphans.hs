@@ -1,6 +1,6 @@
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
-module Orphans
+module Interview.Orphans
     ( Stats(..)
     , WebSocket
     ) where

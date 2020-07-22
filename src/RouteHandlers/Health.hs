@@ -9,7 +9,7 @@ import           Network.WebSockets.Connection (Connection)
 import           Interview.Class.Concurrency (Concurrency(..))
 import           Interview.Class.Instrumentation (Instrumentation(..))
 import           Interview.Class.WebSocket (WebSocket(..))
-import           ServerStats (fromValue)
+import           Interview.ServerStats (fromValue)
 
 
 serverHealth

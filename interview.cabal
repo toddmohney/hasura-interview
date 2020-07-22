@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: c75668930a315835d6e8e6257eec62eb1247a3e6fe5ea5347f0633fe550c6095
+-- hash: cbf6638c506d24753e287f2e5489274e31e1d7f6ac747e6b3b7fa435cd76b30a
 
 name:           interview
 version:        0.1.0.0
@@ -33,6 +33,8 @@ library
       Interview.Class.WebSocket
       Interview.Errors
       Interview.Environment
+      Interview.Orphans
+      Interview.ServerStats
   other-modules:
       Paths_interview
   hs-source-dirs:
@@ -40,7 +42,8 @@ library
   default-extensions: DefaultSignatures DeriveGeneric DerivingStrategies FlexibleContexts GeneralizedNewtypeDeriving InstanceSigs LambdaCase MultiParamTypeClasses OverloadedStrings RecordWildCards TemplateHaskell TypeApplications TypeFamilies
   ghc-options: -Wall -Wcompat -Werror -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wredundant-constraints -fhide-source-paths -fno-warn-warnings-deprecations -freverse-errors -fwarn-unused-binds -fwarn-unused-imports -fwarn-unused-matches
   build-depends:
-      base
+      aeson
+    , base
     , bytestring
     , ekg-core
     , exceptions
@@ -59,7 +62,9 @@ library
     , persistent-template
     , servant
     , servant-blaze
+    , servant-ekg
     , servant-server
+    , servant-websockets
     , text
     , time
     , unordered-containers
@@ -74,12 +79,10 @@ executable server
       App
       AppConfig
       Components.MainContainer
-      Orphans
       Pages.Home
       RouteHandlers.Health
       RouteHandlers.Home
       Server
-      ServerStats
       Paths_interview
   hs-source-dirs:
       ./src
@@ -115,13 +118,18 @@ test-suite hspecs
   main-is: Main.hs
   other-modules:
       Spec
+      Test.Interview.ServerStatsSpec
       Paths_interview
   hs-source-dirs:
       ./test
   default-extensions: DefaultSignatures DeriveGeneric DerivingStrategies FlexibleContexts GeneralizedNewtypeDeriving InstanceSigs LambdaCase MultiParamTypeClasses OverloadedStrings RecordWildCards TemplateHaskell TypeApplications TypeFamilies
   ghc-options: -Wall -Wcompat -Werror -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wredundant-constraints -fhide-source-paths -fno-warn-warnings-deprecations -freverse-errors -fwarn-unused-binds -fwarn-unused-imports -fwarn-unused-matches -fno-warn-unused-imports -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      base
+      aeson
+    , base
+    , ekg-core
+    , hedgehog
+    , hedgehog-classes
     , hspec
     , interview
     , text

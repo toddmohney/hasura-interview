@@ -53,7 +53,10 @@ library:
   - Interview.Class.WebSocket
   - Interview.Errors
   - Interview.Environment
+  - Interview.Orphans
+  - Interview.ServerStats
   dependencies:
+  - aeson
   - base
   - bytestring
   - ekg-core
@@ -73,7 +76,9 @@ library:
   - persistent-template
   - servant
   - servant-blaze
+  - servant-ekg
   - servant-server
+  - servant-websockets
   - text
   - time
   - unordered-containers
@@ -123,7 +128,11 @@ tests:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
+    - aeson
     - base
+    - ekg-core
+    - hedgehog
+    - hedgehog-classes
     - hspec
     - text
     - unordered-containers

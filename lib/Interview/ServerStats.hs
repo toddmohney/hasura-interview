@@ -1,18 +1,18 @@
-module ServerStats where
+module Interview.ServerStats where
 
 import           Data.Aeson.TH
 import qualified Data.HashMap.Strict as HM
 import           Data.Text (Text)
 import           GHC.Int (Int64)
-import           Orphans (Stats(..))
 import           System.Metrics (Sample, Value(..))
 
+import           Interview.Orphans (Stats(..))
 
 data ResponseStatusCount = ResponseStatusCount
     { fiveHundreds :: Int64
     , fourHundreds :: Int64
     , twoHundreds :: Int64
-    }
+    } deriving (Show, Eq)
 
 $(deriveJSON defaultOptions ''ResponseStatusCount)
 
@@ -21,7 +21,7 @@ data ResponseCount = ResponseCount
     { totalResponseCount :: Int64
     , responseStatusCounts :: ResponseStatusCount
     , responseTimeDistribution :: Maybe Stats
-    }
+    } deriving (Show, Eq)
 
 $(deriveJSON defaultOptions ''ResponseCount)
 
@@ -29,7 +29,7 @@ $(deriveJSON defaultOptions ''ResponseCount)
 data RequestMetrics = RequestMetrics
     { inFlightRequests :: Int64
     , responsesStats :: ResponseCount
-    }
+    } deriving (Show, Eq)
 
 $(deriveJSON defaultOptions ''RequestMetrics)
 
@@ -56,7 +56,7 @@ data GCMetrics = GCMetrics
     , wallTime :: Int64
     , currentBytesUsed :: Int64
     , cpuTime :: Int64
-    }
+    } deriving (Show, Eq)
 
 $(deriveJSON defaultOptions ''GCMetrics)
 
@@ -65,7 +65,7 @@ data ServerStats = ServerStats
     { requestMetrics :: RequestMetrics
     , rawRequestMetrics :: RequestMetrics
     , gcMetrics :: GCMetrics
-    }
+    } deriving (Show, Eq)
 
 $(deriveJSON defaultOptions ''ServerStats)
 
