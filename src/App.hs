@@ -16,9 +16,12 @@ import           Control.Monad.Reader (MonadReader, ReaderT, asks, runReaderT)
 import           Data.Text (Text)
 import           Servant (Handler, ServerError)
 import qualified System.Log.FastLogger as Log
+import           System.Metrics (Sample)
+import qualified System.Metrics as EKG
 
 import           AppConfig (AppConfig(..), getAppConfig)
 import           Interview.Class.FastLogger (FastLogger(..), LogLevel(..), logMessage)
+import           Interview.Class.Instrumentation (Instrumentation(..))
 import           Interview.Class.Time (MonadTime(..))
 import           Interview.Database (SqlPersistT, runSqlPool)
 import           Interview.Database.Class (MonadDB(..))
@@ -38,6 +41,14 @@ newtype AppT a = AppT { unApp :: ReaderT AppConfig Handler a }
 
 runAppT :: AppConfig -> AppT a -> Handler a
 runAppT cfg appT = runReaderT (unApp appT) cfg
+
+
+instance Instrumentation AppT where
+    sampleAll
+        :: AppT Sample
+    sampleAll = do
+        store <- asks metricsStore
+        liftIO $ EKG.sampleAll store
 
 
 instance MonadDB AppT where

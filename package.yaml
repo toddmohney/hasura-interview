@@ -47,6 +47,7 @@ library:
   exposed-modules:
   - Interview
   - Interview.Class.FastLogger
+  - Interview.Class.Instrumentation
   - Interview.Class.Time
   - Interview.Database
   - Interview.Database.Class
@@ -55,6 +56,7 @@ library:
   dependencies:
   - base
   - bytestring
+  - ekg-core
   - exceptions
   - fast-logger
   - filepath
@@ -89,12 +91,14 @@ executables:
     - base
     - blaze-html
     - blaze-markup
+    - ekg-core
     - exceptions
     - fast-logger
     - interview
     - lens
     - mtl
     - servant-blaze
+    - servant-ekg
     - servant-server
     - text
     - warp

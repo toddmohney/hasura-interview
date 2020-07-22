@@ -4,7 +4,7 @@
 
 module Server
   ( API
-  , app
+  , mkApp
   , api
   , server
   ) where
@@ -13,6 +13,7 @@ import Network.Wai as Wai
 import Network.Wai.Middleware.Cors
 import Network.Wai.Middleware.RequestLogger (logStdoutDev)
 import Servant
+import qualified Servant.Ekg as EKG
 
 import API (API, api, routeHandlers)
 import App
@@ -20,14 +21,18 @@ import App
 server :: ServerT API AppT
 server = routeHandlers
 
-app
+mkApp
     :: AppConfig
-    -> Wai.Application
-app cfg =
-    logStdoutDev
-        . corsMiddleWare
-        $ serveWithContext api ctx serverT
+    -> IO Wai.Application
+mkApp cfg = do
+    monitorEndpoints' <- EKG.monitorEndpoints api (metricsStore cfg)
+    pure $ monitorEndpoints' app
   where
+    app =
+        logStdoutDev
+            . corsMiddleWare
+            $ serveWithContext api ctx serverT
+
     serverT = hoistServerWithContext
         api
         (Proxy :: Proxy '[])
@@ -36,11 +41,14 @@ app cfg =
 
     ctx = EmptyContext
 
+
 nt :: AppConfig -> AppT a -> Handler a
 nt cfg x = App.runAppT cfg x
 
+
 corsMiddleWare :: Middleware
 corsMiddleWare = cors (const $ Just corsPolicy)
+
 
 corsPolicy :: CorsResourcePolicy
 corsPolicy =
@@ -51,4 +59,5 @@ corsPolicy =
                                  , corsMethods = allowedMethods
                                  , corsRequestHeaders = allowedHeaders
                                  }
+
 

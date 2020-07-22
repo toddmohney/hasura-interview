@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 457c4db23e7ff964217e9671f78406f8da7a64437deb555791f8c74dc8c8f175
+-- hash: 4c884f01bfb8da33979152341ea201674afd7a4707f3244220ecd149733d6f91
 
 name:           interview
 version:        0.1.0.0
@@ -27,6 +27,7 @@ library
   exposed-modules:
       Interview
       Interview.Class.FastLogger
+      Interview.Class.Instrumentation
       Interview.Class.Time
       Interview.Database
       Interview.Database.Class
@@ -45,6 +46,7 @@ library
   build-depends:
       base
     , bytestring
+    , ekg-core
     , exceptions
     , fast-logger
     , filepath
@@ -87,12 +89,14 @@ executable server
       base
     , blaze-html
     , blaze-markup
+    , ekg-core
     , exceptions
     , fast-logger
     , interview
     , lens
     , mtl
     , servant-blaze
+    , servant-ekg
     , servant-server
     , text
     , wai

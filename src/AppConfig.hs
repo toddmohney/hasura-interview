@@ -4,6 +4,7 @@ module AppConfig
   ) where
 
 import           System.Environment (getEnv, lookupEnv)
+import qualified System.Metrics as EKG
 
 import           Interview.Class.FastLogger (LoggerSet)
 import qualified Interview.Class.FastLogger as Log
@@ -16,6 +17,7 @@ data AppConfig = AppConfig
     , appLogger :: !LoggerSet
     , appDebugging :: !Bool
     , appDbConn :: !ConnectionPool
+    , metricsStore :: !EKG.Store
     }
 
 {-
@@ -29,6 +31,7 @@ getAppConfig = do
     logger <- mkLoggerSet
     debugging <- maybe False read <$> lookupEnv "DEBUG"
     dbPool <- mkPool env
+    metricsStore <- EKG.newStore
 
     pure $ AppConfig
         { appEnv = env
@@ -36,6 +39,7 @@ getAppConfig = do
         , appLogger = logger
         , appDebugging = debugging
         , appDbConn = dbPool
+        , metricsStore = metricsStore
         }
 
 
