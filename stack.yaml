@@ -6,7 +6,7 @@ packages:
 flags: {}
 
 extra-deps:
-  - ../servant-ekg
+  - ./vendor/servant-ekg
   - hedgehog-1.0.2
   - hedgehog-classes-0.2.4.1
 

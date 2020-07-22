@@ -1,0 +1,6 @@
+resolver: lts-16.4
+packages:
+- '.'
+extra-deps:
+- ekg-0.4.0.15
+- ekg-json-0.1.0.6
