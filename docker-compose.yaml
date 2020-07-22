@@ -8,6 +8,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    image: hasura-interview-server
     command: server
     env_file:
       - ./env/server.env
