@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: bd04ecc9bf4ca801bf5eb61ce7e11be37c7745903f61d7e11099c51babe5b86f
+-- hash: 1846c5a99667f64bd04e5e736c3a100170babaea9c403ce7e1e7b8e24cf96852
 
 name:           interview
 version:        0.1.0.0
@@ -90,7 +90,7 @@ executable server
   hs-source-dirs:
       ./src
   default-extensions: DefaultSignatures DeriveGeneric DerivingStrategies FlexibleContexts GeneralizedNewtypeDeriving InstanceSigs LambdaCase MultiParamTypeClasses OverloadedStrings RecordWildCards TemplateHaskell TypeApplications TypeFamilies
-  ghc-options: -Wall -Wcompat -Werror -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wredundant-constraints -fhide-source-paths -fno-warn-warnings-deprecations -freverse-errors -fwarn-unused-binds -fwarn-unused-imports -fwarn-unused-matches -threaded -rtsopts -with-rtsopts=-N
+  ghc-options: -Wall -Wcompat -Werror -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wredundant-constraints -fhide-source-paths -fno-warn-warnings-deprecations -freverse-errors -fwarn-unused-binds -fwarn-unused-imports -fwarn-unused-matches -threaded -rtsopts -with-rtsopts=-T
   build-depends:
       aeson
     , base

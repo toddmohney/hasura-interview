@@ -33,6 +33,9 @@ getAppConfig = do
     dbPool <- mkPool env
     metricsStore <- EKG.newStore
 
+    -- collect system metrics
+    EKG.registerGcMetrics metricsStore
+
     pure $ AppConfig
         { appEnv = env
         , appPort = port

@@ -28,6 +28,25 @@ homePageHtml page =
         div $ do
             h1 "Server Health Metrics"
             p . toHtml $ page ^. message
-            pre
-                ! id "stats"
-                $ toHtml ("" :: Text)
+
+            div ! class_ "row" $ do
+                div ! class_ "col-lg-3" $ do
+                    h2 "API endpoint metrics"
+                    hr
+                    pre
+                        ! id "api-metrics"
+                        $ toHtml ("" :: Text)
+
+                div ! class_ "col-lg-3" $ do
+                    h2 "API RAW endpoint metrics"
+                    hr
+                    pre
+                        ! id "api-raw-metrics"
+                        $ toHtml ("" :: Text)
+
+                div ! class_ "col-lg-3" $ do
+                    h2 "GC metrics"
+                    hr
+                    pre
+                        ! id "gc-metrics"
+                        $ toHtml ("" :: Text)
