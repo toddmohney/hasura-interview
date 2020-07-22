@@ -38,6 +38,10 @@ wrapperHtml pageContent =
                 ! customAttribute "crossorigin" "anonymous"
                 $ span ""
 
+            script
+                ! src "http://localhost:3000/public/js/websocket.js"
+                $ span ""
+
         body $ do
             div ! class_ "container-fluid p-0" $ do
                 mainNavHtml

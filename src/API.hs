@@ -5,20 +5,28 @@
 module API where
 
 import           Servant
+import           Orphans (WebSocket)
 import           Servant.HTML.Blaze (HTML)
 
 import           App (AppT)
 import           Pages.Home (HomePage)
 import           RouteHandlers.Home (home)
+import           RouteHandlers.Health (serverHealth)
 
 
 type API =
     Home
+        :<|> ServerHealth
         :<|> PublicAssets
 
 
 type Home =
     Get '[HTML] HomePage
+
+
+type ServerHealth =
+    "health"
+        :> WebSocket
 
 
 type PublicAssets =
@@ -35,4 +43,5 @@ routeHandlers =
   where
     publicRouteHandlers =
         home
+            :<|> serverHealth
             :<|> serveDirectoryWebApp "/usr/local/src/workspace/public"

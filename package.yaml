@@ -46,9 +46,11 @@ library:
   source-dirs: ./lib
   exposed-modules:
   - Interview
+  - Interview.Class.Concurrency
   - Interview.Class.FastLogger
   - Interview.Class.Instrumentation
   - Interview.Class.Time
+  - Interview.Class.WebSocket
   - Interview.Database
   - Interview.Database.Class
   - Interview.Errors
@@ -78,6 +80,7 @@ library:
   - time
   - unordered-containers
   - uuid
+  - websockets
 
 executables:
   server:
@@ -88,9 +91,11 @@ executables:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
+    - aeson
     - base
     - blaze-html
     - blaze-markup
+    - bytestring
     - ekg-core
     - exceptions
     - fast-logger
@@ -100,11 +105,14 @@ executables:
     - servant-blaze
     - servant-ekg
     - servant-server
+    - servant-websockets
     - text
+    - unordered-containers
     - warp
     - wai
     - wai-cors
     - wai-extra
+    - websockets
 
 tests:
   hspecs:

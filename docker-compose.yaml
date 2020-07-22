@@ -18,8 +18,8 @@ services:
     volumes:
       # We mount the migrations folder so we can edit, run, and rerun
       # the migrations without rebuilding the container after every change.
-      - ./apps/webapp/migrations:/etc/workspace/migrations
-      - ./apps/webapp/assets:/usr/local/src/workspace/assets
+      - ./migrations:/usr/local/src/workspace/migrations
+      - ./public:/usr/local/src/workspace/public/
 
   postgres:
     image: postgres:12-alpine

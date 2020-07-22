@@ -1,9 +1,10 @@
 module Pages.Home where
 
-import           Control.Lens
+import           Control.Lens hiding (pre)
 import           Data.Text (Text)
 import           Prelude hiding (head, id, div, span)
 import           Text.Blaze.Html5 hiding (title)
+import           Text.Blaze.Html5.Attributes
 
 import           Components.MainContainer (wrapperHtml)
 
@@ -25,5 +26,8 @@ homePageHtml
 homePageHtml page =
     wrapperHtml $
         div $ do
-            p "Welcome!"
+            h1 "Server Health Metrics"
             p . toHtml $ page ^. message
+            pre
+                ! id "stats"
+                $ toHtml ("" :: Text)

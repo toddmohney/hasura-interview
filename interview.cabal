@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 4c884f01bfb8da33979152341ea201674afd7a4707f3244220ecd149733d6f91
+-- hash: bd04ecc9bf4ca801bf5eb61ce7e11be37c7745903f61d7e11099c51babe5b86f
 
 name:           interview
 version:        0.1.0.0
@@ -26,9 +26,11 @@ source-repository head
 library
   exposed-modules:
       Interview
+      Interview.Class.Concurrency
       Interview.Class.FastLogger
       Interview.Class.Instrumentation
       Interview.Class.Time
+      Interview.Class.WebSocket
       Interview.Database
       Interview.Database.Class
       Interview.Errors
@@ -68,6 +70,7 @@ library
     , time
     , unordered-containers
     , uuid
+    , websockets
   default-language: Haskell2010
 
 executable server
@@ -77,18 +80,23 @@ executable server
       App
       AppConfig
       Components.MainContainer
+      Orphans
       Pages.Home
+      RouteHandlers.Health
       RouteHandlers.Home
       Server
+      ServerStats
       Paths_interview
   hs-source-dirs:
       ./src
   default-extensions: DefaultSignatures DeriveGeneric DerivingStrategies FlexibleContexts GeneralizedNewtypeDeriving InstanceSigs LambdaCase MultiParamTypeClasses OverloadedStrings RecordWildCards TemplateHaskell TypeApplications TypeFamilies
   ghc-options: -Wall -Wcompat -Werror -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wredundant-constraints -fhide-source-paths -fno-warn-warnings-deprecations -freverse-errors -fwarn-unused-binds -fwarn-unused-imports -fwarn-unused-matches -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      base
+      aeson
+    , base
     , blaze-html
     , blaze-markup
+    , bytestring
     , ekg-core
     , exceptions
     , fast-logger
@@ -98,11 +106,14 @@ executable server
     , servant-blaze
     , servant-ekg
     , servant-server
+    , servant-websockets
     , text
+    , unordered-containers
     , wai
     , wai-cors
     , wai-extra
     , warp
+    , websockets
   default-language: Haskell2010
 
 test-suite hspecs

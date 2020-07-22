@@ -17,5 +17,5 @@ home = do
         >>= logInfo . T.pack . show
 
     pure HomePage
-        { _message = "Hiya!"
+        { _message = ""
         }

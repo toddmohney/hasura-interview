@@ -14,15 +14,19 @@ import           Control.Monad.Except (MonadError(..))
 import           Control.Monad.IO.Class (MonadIO(..))
 import           Control.Monad.Reader (MonadReader, ReaderT, asks, runReaderT)
 import           Data.Text (Text)
+import           Network.WebSockets (WebSocketsData)
+import           Network.WebSockets.Connection (Connection)
 import           Servant (Handler, ServerError)
 import qualified System.Log.FastLogger as Log
 import           System.Metrics (Sample)
 import qualified System.Metrics as EKG
 
 import           AppConfig (AppConfig(..), getAppConfig)
+import           Interview.Class.Concurrency (Concurrency(..), Seconds(..))
 import           Interview.Class.FastLogger (FastLogger(..), LogLevel(..), logMessage)
 import           Interview.Class.Instrumentation (Instrumentation(..))
 import           Interview.Class.Time (MonadTime(..))
+import           Interview.Class.WebSocket (PingInterval(..), WebSocket(..))
 import           Interview.Database (SqlPersistT, runSqlPool)
 import           Interview.Database.Class (MonadDB(..))
 import           Interview.Environment (Environment(..))
@@ -43,12 +47,38 @@ runAppT :: AppConfig -> AppT a -> Handler a
 runAppT cfg appT = runReaderT (unApp appT) cfg
 
 
+instance Concurrency AppT where
+    sleep
+        :: Seconds
+        -> AppT ()
+    sleep secs =
+        liftIO $ sleep secs
+
+
 instance Instrumentation AppT where
     sampleAll
         :: AppT Sample
     sampleAll = do
         store <- asks metricsStore
         liftIO $ EKG.sampleAll store
+
+
+instance WebSocket AppT where
+    forkPingThread
+        :: Connection
+        -> PingInterval
+        -> AppT ()
+    forkPingThread conn interval =
+        liftIO $ forkPingThread conn interval
+
+
+    sendTextDatas
+        :: (WebSocketsData a)
+        => Connection
+        -> [a]
+        -> AppT ()
+    sendTextDatas conn msgs =
+        liftIO $ sendTextDatas conn msgs
 
 
 instance MonadDB AppT where
