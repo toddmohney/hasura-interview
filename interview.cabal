@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 1846c5a99667f64bd04e5e736c3a100170babaea9c403ce7e1e7b8e24cf96852
+-- hash: c75668930a315835d6e8e6257eec62eb1247a3e6fe5ea5347f0633fe550c6095
 
 name:           interview
 version:        0.1.0.0
@@ -31,15 +31,9 @@ library
       Interview.Class.Instrumentation
       Interview.Class.Time
       Interview.Class.WebSocket
-      Interview.Database
-      Interview.Database.Class
       Interview.Errors
       Interview.Environment
   other-modules:
-      Interview.Database.Config
-      Interview.Database.Logging
-      Interview.Database.Migrations
-      Interview.Database.Models
       Paths_interview
   hs-source-dirs:
       ./lib

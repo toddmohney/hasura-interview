@@ -8,7 +8,6 @@ RUN apt-get update && apt-get install -y \
       locales \
       postgresql-client \
       software-properties-common \
-      sqitch \
       tzdata
 
 RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && locale-gen
@@ -21,11 +20,8 @@ RUN mkdir -p /usr/local/src/workspace
 WORKDIR /usr/local/src/workspace
 
 COPY ./public /usr/local/src/workspace/public/
-COPY ./migrations /usr/local/src/workspace/migrations/
 
 COPY ./bin/* /usr/local/bin/
-
-# ENTRYPOINT ["/usr/local/src/workspace/migrations/run-migrations.sh"]
 
 CMD ["server"]
 

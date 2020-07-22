@@ -8,7 +8,6 @@ import qualified System.Metrics as EKG
 
 import           Interview.Class.FastLogger (LoggerSet)
 import qualified Interview.Class.FastLogger as Log
-import           Interview.Database (ConnectionPool, mkPool)
 import           Interview.Environment
 
 data AppConfig = AppConfig
@@ -16,7 +15,6 @@ data AppConfig = AppConfig
     , appPort :: !Int
     , appLogger :: !LoggerSet
     , appDebugging :: !Bool
-    , appDbConn :: !ConnectionPool
     , metricsStore :: !EKG.Store
     }
 
@@ -30,7 +28,6 @@ getAppConfig = do
     port <- read <$> getEnv "PORT"
     logger <- mkLoggerSet
     debugging <- maybe False read <$> lookupEnv "DEBUG"
-    dbPool <- mkPool env
     metricsStore <- EKG.newStore
 
     -- collect system metrics
@@ -41,7 +38,6 @@ getAppConfig = do
         , appPort = port
         , appLogger = logger
         , appDebugging = debugging
-        , appDbConn = dbPool
         , metricsStore = metricsStore
         }
 

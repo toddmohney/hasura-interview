@@ -26,7 +26,7 @@ lint: ## Runs code quality and style consistency checks
 restart: ## Rebuilds and restarts our server
 	@$(MAKE) build-server
 	@docker-compose rm -sf server
-	@docker-compose up -d
+	@docker-compose up -d --remove-orphans
 
 
 .PHONY: build-server

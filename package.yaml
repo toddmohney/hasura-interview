@@ -51,8 +51,6 @@ library:
   - Interview.Class.Instrumentation
   - Interview.Class.Time
   - Interview.Class.WebSocket
-  - Interview.Database
-  - Interview.Database.Class
   - Interview.Errors
   - Interview.Environment
   dependencies:

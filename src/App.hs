@@ -27,8 +27,6 @@ import           Interview.Class.FastLogger (FastLogger(..), LogLevel(..), logMe
 import           Interview.Class.Instrumentation (Instrumentation(..))
 import           Interview.Class.Time (MonadTime(..))
 import           Interview.Class.WebSocket (PingInterval(..), WebSocket(..))
-import           Interview.Database (SqlPersistT, runSqlPool)
-import           Interview.Database.Class (MonadDB(..))
 import           Interview.Environment (Environment(..))
 
 
@@ -79,15 +77,6 @@ instance WebSocket AppT where
         -> AppT ()
     sendTextDatas conn msgs =
         liftIO $ sendTextDatas conn msgs
-
-
-instance MonadDB AppT where
-    runDb
-        :: SqlPersistT IO a
-        -> AppT a
-    runDb query = do
-        conn <- asks appDbConn
-        liftIO $ runSqlPool query conn
 
 
 instance MonadTime AppT where
