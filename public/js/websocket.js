@@ -1,5 +1,5 @@
 // Create WebSocket connection.
-const socket = new WebSocket('ws://localhost:3000/health');
+const socket = new WebSocket('ws://localhost:3000/health/status');
 
 // Connection opened
 socket.addEventListener('open', function (event) {

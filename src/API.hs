@@ -26,6 +26,7 @@ type Home =
 
 type ServerHealth =
     "health"
+        :> "status"
         :> WebSocket
 
 
