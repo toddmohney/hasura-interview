@@ -10,9 +10,14 @@ import           Components.MainContainer (wrapperHtml)
 
 data HomePage = HomePage
 
-
 instance ToMarkup HomePage where
     toMarkup = homePageHtml
+
+
+data HelloPage = HelloPage
+
+instance ToMarkup HelloPage where
+    toMarkup = helloPageHtml
 
 
 homePageHtml
@@ -45,3 +50,15 @@ homePageHtml _page =
                     pre
                         ! id "gc-metrics"
                         $ toHtml ("" :: Text)
+
+
+helloPageHtml
+    :: HelloPage
+    -> Markup
+helloPageHtml _page =
+    wrapperHtml $
+        div $ do
+            div ! class_ "jumbotron" $ do
+                h1
+                    ! class_ "display-4"
+                    $ toHtml ("Hello!" :: Text)

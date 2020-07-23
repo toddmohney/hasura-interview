@@ -21,7 +21,7 @@ devel: ## Builds and tests upon file change
 
 .PHONY: lint
 lint: ## Runs code quality and style consistency checks
-	@hlint lint \
+	@hlint \
 		./src \
 		./lib
 

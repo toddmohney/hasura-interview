@@ -9,19 +9,25 @@ import           Servant.HTML.Blaze (HTML)
 
 import           App (AppT)
 import           Interview.Orphans (WebSocket)
-import           Pages.Home (HomePage)
-import           RouteHandlers.Home (home)
+import           Pages.Home (HomePage, HelloPage)
+import           RouteHandlers.Home (home, hello)
 import           RouteHandlers.Health (serverHealth)
 
 
 type API =
     Home
+        :<|> Hello
         :<|> ServerHealth
         :<|> PublicAssets
 
 
 type Home =
     Get '[HTML] HomePage
+
+
+type Hello =
+    "hello"
+        :> Get '[HTML] HelloPage
 
 
 type ServerHealth =
@@ -44,5 +50,6 @@ routeHandlers =
   where
     publicRouteHandlers =
         home
+            :<|> hello
             :<|> serverHealth
             :<|> serveDirectoryWebApp "/usr/local/src/workspace/public"

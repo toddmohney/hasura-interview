@@ -51,6 +51,9 @@
 
 # Ignore some builtin hints
 - ignore: {name: Redundant do}
+- ignore: {name: Redundant $, within:
+    [ Pages.Home
+    ]}
 - ignore: {name: Eta reduce}
 - ignore: {name: Use section}
 - ignore: {name: Use ., within:
